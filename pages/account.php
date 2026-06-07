@@ -56,8 +56,8 @@ $memberSince = date('F j, Y', strtotime($row['created_at']));
 <head>
     <meta charset="UTF-8">
     <title>My Account — AI Site Manager</title>
-    <link rel="icon" type="image/png" href="/ai-site-manager/assets/images/logo.png">
-    <link rel="stylesheet" href="/ai-site-manager/assets/css/style.css">
+    <link rel="icon" type="image/png" href="/assets/images/logo.png">
+    <link rel="stylesheet" href="/assets/css/style.css">
 </head>
 <body>
 <div class="app-layout">

@@ -54,7 +54,7 @@ async function aiAction(action) {
     result.textContent = '';
 
     try {
-        const response = await fetch('/ai-site-manager/api/ai-assist.php', {
+        const response = await fetch('/api/ai-assist.php', {
             method:  'POST',
             headers: { 'Content-Type': 'application/json' },
             body:    JSON.stringify({ action, content, title, page_id: PAGE_ID })

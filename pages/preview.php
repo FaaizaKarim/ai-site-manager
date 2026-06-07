@@ -27,7 +27,7 @@ function fixPreviewImagePaths(string $html): string {
                 return $m[0];
             }
 
-            if (strpos($src, '/ai-site-manager/assets/uploads/') === 0) {
+            if (strpos($src, '/assets/uploads/') === 0) {
                 return $m[0];
             }
 
@@ -35,7 +35,7 @@ function fixPreviewImagePaths(string $html): string {
                 $src = '/ai-site-manager' . $src;
             } elseif (preg_match('#(?:^|/)assets/uploads/#', $src)) {
                 $filename = basename($src);
-                $src = '/ai-site-manager/assets/uploads/' . $filename;
+                $src = '/assets/uploads/' . $filename;
             }
 
             return '<img' . $m[1] . ' src="' . htmlspecialchars($src, ENT_QUOTES) . '"';
@@ -52,7 +52,7 @@ $content = fixPreviewImagePaths($page['content'] ?? '');
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title><?= htmlspecialchars($page['title']) ?> — Preview</title>
-    <link rel="icon" type="image/png" href="/ai-site-manager/assets/images/logo.png">
+    <link rel="icon" type="image/png" href="/assets/images/logo.png">
     <style>
         * { box-sizing: border-box; margin: 0; padding: 0; }
         body {

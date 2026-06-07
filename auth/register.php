@@ -3,7 +3,7 @@ require_once __DIR__ . '/../config/db.php';
 session_start();
 
 if (!empty($_SESSION['user_id'])) {
-    header('Location: /ai-site-manager/pages/dashboard.php');
+    header('Location: /pages/dashboard.php');
     exit;
 }
 
@@ -30,7 +30,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
             $hash = password_hash($password, PASSWORD_DEFAULT);
             $ins  = $db->prepare('INSERT INTO users (name, email, password_hash) VALUES (?, ?, ?)');
             $ins->execute([$name, $email, $hash]);
-            header('Location: /ai-site-manager/auth/login.php?registered=1');
+            header('Location: /auth/login.php?registered=1');
             exit;
         }
     }
@@ -42,8 +42,8 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Register — AI Site Manager</title>
-    <link rel="icon" type="image/png" href="/ai-site-manager/assets/images/logo.png">
-    <link rel="stylesheet" href="/ai-site-manager/assets/css/style.css">
+    <link rel="icon" type="image/png" href="/assets/images/logo.png">
+    <link rel="stylesheet" href="/assets/css/style.css">
 </head>
 <body class="auth-page">
     <div class="auth-card">
@@ -71,7 +71,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
         </form>
         <p class="auth-hint">
             Already have an account?
-            <a href="/ai-site-manager/auth/login.php" style="color:var(--accent)">Sign in</a>
+            <a href="/auth/login.php" style="color:var(--accent)">Sign in</a>
         </p>
     </div>
 </body>

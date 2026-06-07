@@ -10,5 +10,5 @@ if ($siteId > 0) {
     $stmt->execute([$siteId, $user['id']]);
 }
 
-header('Location: /ai-site-manager/pages/dashboard.php');
+header('Location: /pages/dashboard.php');
 exit;

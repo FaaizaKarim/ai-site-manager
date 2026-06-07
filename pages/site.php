@@ -8,7 +8,7 @@ $db     = getDB();
 $sStmt  = $db->prepare('SELECT * FROM sites WHERE id = ? AND user_id = ?');
 $sStmt->execute([$siteId, $user['id']]);
 $site   = $sStmt->fetch();
-if (!$site) { header('Location: /ai-site-manager/pages/dashboard.php'); exit; }
+if (!$site) { header('Location: /pages/dashboard.php'); exit; }
 
 $pStmt = $db->prepare('SELECT * FROM pages WHERE site_id = ? ORDER BY created_at DESC');
 $pStmt->execute([$siteId]);
@@ -19,8 +19,8 @@ $pages = $pStmt->fetchAll();
 <head>
     <meta charset="UTF-8">
     <title><?= htmlspecialchars($site['name']) ?> — AI Site Manager</title>
-    <link rel="icon" type="image/png" href="/ai-site-manager/assets/images/logo.png">
-    <link rel="stylesheet" href="/ai-site-manager/assets/css/style.css">
+    <link rel="icon" type="image/png" href="/assets/images/logo.png">
+    <link rel="stylesheet" href="/assets/css/style.css">
 </head>
 <body>
 <div class="app-layout">
@@ -32,16 +32,16 @@ $pages = $pStmt->fetchAll();
                 <p class="page-subtitle"><?= htmlspecialchars($site['url']) ?></p>
             </div>
             <div style="display:flex;gap:8px">
-                <a href="/ai-site-manager/pages/add-page.php?site_id=<?= $siteId ?>"
+                <a href="/pages/add-page.php?site_id=<?= $siteId ?>"
                    class="btn btn-primary">+ Add Page</a>
-                <a href="/ai-site-manager/pages/dashboard.php" class="btn btn-ghost">← Dashboard</a>
+                <a href="/pages/dashboard.php" class="btn btn-ghost">← Dashboard</a>
             </div>
         </div>
 
         <?php if (empty($pages)): ?>
             <div class="card" style="text-align:center;padding:2.5rem">
                 <p style="color:var(--text-muted);margin-bottom:1rem">No pages yet.</p>
-                <a href="/ai-site-manager/pages/add-page.php?site_id=<?= $siteId ?>"
+                <a href="/pages/add-page.php?site_id=<?= $siteId ?>"
                    class="btn btn-primary">Add first page</a>
             </div>
         <?php else: ?>
@@ -64,7 +64,7 @@ $pages = $pStmt->fetchAll();
                                 <td style="color:var(--text-muted);font-size:13px">
                                     <?= date('M j, Y', strtotime($page['updated_at'])) ?></td>
                                 <td>
-                                    <a href="/ai-site-manager/pages/editor.php?id=<?= $page['id'] ?>"
+                                    <a href="/pages/editor.php?id=<?= $page['id'] ?>"
                                        class="btn btn-ghost" style="padding:5px 12px;font-size:13px">Edit</a>
                                 </td>
                             </tr>

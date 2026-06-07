@@ -8,7 +8,7 @@ session_start();
 
 function requireLogin(): void {
     if (empty($_SESSION['user_id'])) {
-        header('Location: /ai-site-manager/auth/login.php');
+        header('Location: /auth/login.php');
         exit;
     }
 }

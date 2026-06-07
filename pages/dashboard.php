@@ -35,8 +35,8 @@ $stats = $statsStmt->fetch();
 <head>
     <meta charset="UTF-8">
     <title>Dashboard — AI Site Manager</title>
-    <link rel="icon" type="image/png" href="/ai-site-manager/assets/images/logo.png">
-    <link rel="stylesheet" href="/ai-site-manager/assets/css/style.css">
+    <link rel="icon" type="image/png" href="/assets/images/logo.png">
+    <link rel="stylesheet" href="/assets/css/style.css">
 </head>
 <body>
 <div class="app-layout">
@@ -47,7 +47,7 @@ $stats = $statsStmt->fetch();
                 <h1 class="page-title">My Sites</h1>
                 <p class="page-subtitle">Welcome back, <?= htmlspecialchars($user['name']) ?></p>
             </div>
-            <a href="/ai-site-manager/pages/add-site.php" class="btn btn-primary">+ Add Site</a>
+            <a href="/pages/add-site.php" class="btn btn-primary">+ Add Site</a>
         </div>
 
         <div class="stats-bar">
@@ -79,7 +79,7 @@ $stats = $statsStmt->fetch();
         <?php if (empty($sites)): ?>
             <div class="card" style="text-align:center;padding:3rem">
                 <p style="color:var(--text-muted);margin-bottom:1rem">No sites yet.</p>
-                <a href="/ai-site-manager/pages/add-site.php" class="btn btn-primary">Add your first site</a>
+                <a href="/pages/add-site.php" class="btn btn-primary">Add your first site</a>
             </div>
         <?php else: ?>
             <div class="card-grid" id="sites-grid">
@@ -92,9 +92,9 @@ $stats = $statsStmt->fetch();
                         <?= htmlspecialchars($site['description'] ?? '') ?></p>
                     <div class="card-meta"><?= $site['page_count'] ?> pages</div>
                     <div class="card-actions">
-                        <a href="/ai-site-manager/pages/site.php?id=<?= $site['id'] ?>"
+                        <a href="/pages/site.php?id=<?= $site['id'] ?>"
                            class="btn btn-primary" style="flex:1;justify-content:center">Manage</a>
-                        <a href="/ai-site-manager/pages/delete-site.php?id=<?= $site['id'] ?>"
+                        <a href="/pages/delete-site.php?id=<?= $site['id'] ?>"
                            class="btn btn-danger"
                            onclick="return confirm('Delete this site?')">Delete</a>
                     </div>

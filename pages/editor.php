@@ -12,7 +12,7 @@ $pStmt->execute([$pageId]);
 $page = $pStmt->fetch();
 
 if (!$page || $page['user_id'] != $user['id']) {
-    header('Location: /ai-site-manager/pages/dashboard.php'); exit;
+    header('Location: /pages/dashboard.php'); exit;
 }
 
 $saved = false;
@@ -37,8 +37,8 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['save'])) {
 <head>
     <meta charset="UTF-8">
     <title>Edit: <?= htmlspecialchars($page['title']) ?> — AI Site Manager</title>
-    <link rel="icon" type="image/png" href="/ai-site-manager/assets/images/logo.png">
-    <link rel="stylesheet" href="/ai-site-manager/assets/css/style.css">
+    <link rel="icon" type="image/png" href="/assets/images/logo.png">
+    <link rel="stylesheet" href="/assets/css/style.css">
 </head>
 <body>
 <div class="app-layout">
@@ -50,9 +50,9 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['save'])) {
                 <p class="page-subtitle"><?= htmlspecialchars($page['site_name']) ?></p>
             </div>
             <div style="display:flex;gap:8px">
-                <a href="/ai-site-manager/pages/preview.php?id=<?= $pageId ?>"
+                <a href="/pages/preview.php?id=<?= $pageId ?>"
                    target="_blank" class="btn btn-ghost">👁 Preview</a>
-                <a href="/ai-site-manager/pages/site.php?id=<?= $page['site_id'] ?>"
+                <a href="/pages/site.php?id=<?= $page['site_id'] ?>"
                    class="btn btn-ghost">← Back</a>
             </div>
         </div>
@@ -186,7 +186,7 @@ document.getElementById('upload-btn').addEventListener('click', async function (
     this.disabled = true;
 
     try {
-        const response = await fetch('/ai-site-manager/api/upload-image.php', {
+        const response = await fetch('/api/upload-image.php', {
             method: 'POST',
             body: formData
         });
@@ -229,6 +229,6 @@ function addImageToGallery(url, gallery) {
     });
 }
 </script>
-<script src="/ai-site-manager/assets/js/ai.js"></script>
+<script src="/assets/js/ai.js"></script>
 </body>
 </html>

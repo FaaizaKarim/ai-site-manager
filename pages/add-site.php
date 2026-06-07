@@ -13,7 +13,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
         $db   = getDB();
         $stmt = $db->prepare('INSERT INTO sites (user_id, name, url, description) VALUES (?,?,?,?)');
         $stmt->execute([$user['id'], $name, $url, $desc]);
-        header('Location: /ai-site-manager/pages/dashboard.php');
+        header('Location: /pages/dashboard.php');
         exit;
     } else {
         $error = 'Site name is required.';
@@ -25,8 +25,8 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
 <head>
     <meta charset="UTF-8">
     <title>Add Site — AI Site Manager</title>
-    <link rel="icon" type="image/png" href="/ai-site-manager/assets/images/logo.png">
-    <link rel="stylesheet" href="/ai-site-manager/assets/css/style.css">
+    <link rel="icon" type="image/png" href="/assets/images/logo.png">
+    <link rel="stylesheet" href="/assets/css/style.css">
 </head>
 <body>
 <div class="app-layout">
@@ -37,7 +37,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
                 <h1 class="page-title">Add New Site</h1>
                 <p class="page-subtitle">Add a website to manage</p>
             </div>
-            <a href="/ai-site-manager/pages/dashboard.php" class="btn btn-ghost">← Back</a>
+            <a href="/pages/dashboard.php" class="btn btn-ghost">← Back</a>
         </div>
         <div class="card" style="max-width:560px">
             <?php if ($error): ?>

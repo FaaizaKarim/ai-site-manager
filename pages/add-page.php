@@ -9,7 +9,7 @@ $db    = getDB();
 $sStmt = $db->prepare('SELECT * FROM sites WHERE id = ? AND user_id = ?');
 $sStmt->execute([$siteId, $user['id']]);
 $site  = $sStmt->fetch();
-if (!$site) { header('Location: /ai-site-manager/pages/dashboard.php'); exit; }
+if (!$site) { header('Location: /pages/dashboard.php'); exit; }
 
 if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     $title   = trim($_POST['title']   ?? '');
@@ -22,7 +22,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     if ($title) {
         $stmt = $db->prepare('INSERT INTO pages (site_id, title, slug, content, status) VALUES (?,?,?,?,?)');
         $stmt->execute([$siteId, $title, $slug, $content, $status]);
-        header('Location: /ai-site-manager/pages/site.php?id=' . $siteId);
+        header('Location: /pages/site.php?id=' . $siteId);
         exit;
     } else {
         $error = 'Page title is required.';
@@ -34,8 +34,8 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
 <head>
     <meta charset="UTF-8">
     <title>Add Page — AI Site Manager</title>
-    <link rel="icon" type="image/png" href="/ai-site-manager/assets/images/logo.png">
-    <link rel="stylesheet" href="/ai-site-manager/assets/css/style.css">
+    <link rel="icon" type="image/png" href="/assets/images/logo.png">
+    <link rel="stylesheet" href="/assets/css/style.css">
 </head>
 <body>
 <div class="app-layout">
@@ -46,7 +46,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
                 <h1 class="page-title">Add Page</h1>
                 <p class="page-subtitle">To: <?= htmlspecialchars($site['name']) ?></p>
             </div>
-            <a href="/ai-site-manager/pages/site.php?id=<?= $siteId ?>" class="btn btn-ghost">← Back</a>
+            <a href="/pages/site.php?id=<?= $siteId ?>" class="btn btn-ghost">← Back</a>
         </div>
         <div class="card" style="max-width:640px">
             <?php if ($error): ?><div class="alert alert-error"><?= $error ?></div><?php endif; ?>

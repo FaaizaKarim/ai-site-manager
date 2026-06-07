@@ -53,5 +53,5 @@ if (!move_uploaded_file($file['tmp_name'], $dest)) {
     exit;
 }
 
-$url = '/ai-site-manager/assets/uploads/' . $filename;
+$url = '/assets/uploads/' . $filename;
 echo json_encode(['success' => true, 'url' => $url]);

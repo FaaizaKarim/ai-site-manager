@@ -4,7 +4,7 @@ require_once __DIR__ . '/../config/mail.php';
 session_start();
 
 if (!empty($_SESSION['user_id'])) {
-    header('Location: /ai-site-manager/pages/dashboard.php');
+    header('Location: /pages/dashboard.php');
     exit;
 }
 
@@ -51,8 +51,8 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Forgot Password — AI Site Manager</title>
-    <link rel="icon" type="image/png" href="/ai-site-manager/assets/images/logo.png">
-    <link rel="stylesheet" href="/ai-site-manager/assets/css/style.css">
+    <link rel="icon" type="image/png" href="/assets/images/logo.png">
+    <link rel="stylesheet" href="/assets/css/style.css">
 </head>
 <body class="auth-page">
     <div class="auth-card">
@@ -74,7 +74,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
             <button type="submit" class="btn btn-primary btn-full">Send Reset Link</button>
         </form>
         <p class="auth-hint">
-            <a href="/ai-site-manager/auth/login.php" style="color:var(--accent)">← Back to sign in</a>
+            <a href="/auth/login.php" style="color:var(--accent)">← Back to sign in</a>
         </p>
     </div>
 </body>
