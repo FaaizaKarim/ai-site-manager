@@ -1,1 +1,1 @@
-web: frankenphp run --config /app/Caddyfile
+web: frankenphp php-server --root /app
