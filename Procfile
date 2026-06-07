@@ -1,1 +1,0 @@
-web: frankenphp php-server --root /app
