@@ -82,7 +82,10 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
         <p class="auth-hint" style="margin-top:0.75rem">
             <a href="/auth/forgot-password.php" style="color:var(--accent)">Forgot password?</a>
         </p>
-       
+        <p class="auth-hint">
+            Don't have an account?
+            <a href="/auth/register.php" style="color:var(--accent)">Create account</a>
+        </p>
     </div>
 </body>
 </html>

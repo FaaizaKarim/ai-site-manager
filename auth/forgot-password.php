@@ -33,7 +33,14 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
             );
             $ins->execute([$email, $token]);
 
-            $baseUrl   = rtrim(env('APP_URL', 'http://localhost/ai-site-manager'), '/');
+            $baseUrl = rtrim(env('APP_URL', ''), '/');
+            if ($baseUrl === '' && !empty($_SERVER['HTTP_HOST'])) {
+                $scheme  = (!empty($_SERVER['HTTPS']) && $_SERVER['HTTPS'] !== 'off') ? 'https' : 'http';
+                $baseUrl = $scheme . '://' . $_SERVER['HTTP_HOST'];
+            }
+            if ($baseUrl === '') {
+                $baseUrl = 'http://localhost';
+            }
             $resetLink = $baseUrl . '/auth/reset-password.php?token=' . urlencode($token);
 
             if (!sendResetEmail($email, $resetLink)) {
@@ -56,7 +63,12 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
 </head>
 <body class="auth-page">
     <div class="auth-card">
-        <div class="auth-logo">⚡ AI Site Manager</div>
+        <div class="auth-logo">
+            <img src="/assets/images/logo.png"
+                 alt="AI Site Manager"
+                 style="width:32px;height:32px;object-fit:contain;vertical-align:middle;margin-right:8px;">
+            AI Site Manager
+        </div>
         <h1 class="auth-title">Forgot password</h1>
 
         <?php if ($message): ?>

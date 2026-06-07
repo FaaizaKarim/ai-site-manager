@@ -47,7 +47,12 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
 </head>
 <body class="auth-page">
     <div class="auth-card">
-        <div class="auth-logo">⚡ AI Site Manager</div>
+        <div class="auth-logo">
+            <img src="/assets/images/logo.png"
+                 alt="AI Site Manager"
+                 style="width:32px;height:32px;object-fit:contain;vertical-align:middle;margin-right:8px;">
+            AI Site Manager
+        </div>
         <h1 class="auth-title">Create account</h1>
         <?php if ($error): ?>
             <div class="alert alert-error"><?= htmlspecialchars($error) ?></div>

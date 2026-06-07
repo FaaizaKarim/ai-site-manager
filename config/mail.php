@@ -11,11 +11,11 @@ use PHPMailer\PHPMailer\Exception as PHPMailerException;
 
 function sendResetEmail(string $toEmail, string $resetLink): bool
 {
-    $mailUser = $_ENV['MAIL_USER'] ?? '';
-    $mailPass = $_ENV['MAIL_PASS'] ?? '';
+    $mailUser = env('MAIL_USER');
+    $mailPass = str_replace(' ', '', env('MAIL_PASS'));
 
     if ($mailUser === '' || $mailPass === '') {
-        error_log('Password reset email failed: MAIL_USER or MAIL_PASS not set in .env');
+        error_log('Password reset email failed: MAIL_USER or MAIL_PASS not configured');
         return false;
     }
 
@@ -30,6 +30,7 @@ function sendResetEmail(string $toEmail, string $resetLink): bool
         $mail->SMTPSecure = PHPMailer::ENCRYPTION_STARTTLS;
         $mail->Port       = 587;
         $mail->CharSet    = PHPMailer::CHARSET_UTF8;
+        $mail->Timeout    = 30;
 
         $mail->setFrom($mailUser, 'AI Site Manager');
         $mail->addAddress($toEmail);
@@ -52,7 +53,7 @@ function sendResetEmail(string $toEmail, string $resetLink): bool
                             <h1 style="margin:0 0 8px;font-size:22px;color:#111827;">Password reset</h1>
                             <p style="margin:0 0 24px;font-size:15px;color:#6b7280;line-height:1.6;">
                                 You requested a password reset for your AI Site Manager account.
-                                Click the button below to choose a new password. This link expires in 1 hour.
+                                Click the button below to choose a new password. This link expires in 24 hours.
                             </p>
                             <p style="margin:0 0 24px;text-align:center;">
                                 <a href="{$safeLink}"
@@ -75,9 +76,10 @@ function sendResetEmail(string $toEmail, string $resetLink): bool
 HTML;
 
         $mail->AltBody = "Reset your AI Site Manager password:\n\n{$resetLink}\n\n"
-            . "This link expires in 1 hour. If you did not request this, ignore this email.";
+            . "This link expires in 24 hours. If you did not request this, ignore this email.";
 
         $mail->send();
+        error_log('Password reset email sent to: ' . $toEmail);
         return true;
     } catch (PHPMailerException $e) {
         error_log('Password reset email failed: ' . $mail->ErrorInfo);
