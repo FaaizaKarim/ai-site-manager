@@ -28,15 +28,19 @@ function fixPreviewImagePaths(string $html): string {
             }
 
             if (strpos($src, '/assets/uploads/') === 0) {
+                // Already an absolute path that should work in the current host.
                 return $m[0];
             }
 
-            if (strpos($src, '/assets/uploads/') === 0) {
-                $src = '/ai-site-manager' . $src;
+            // If the app is hosted under a sub-path (e.g. /ai-site-manager), then
+            // images saved as relative /assets/uploads/... may need prefixing.
+            if (strpos($src, 'assets/uploads/') === 0) {
+                $src = '/ai-site-manager/' . $src;
             } elseif (preg_match('#(?:^|/)assets/uploads/#', $src)) {
                 $filename = basename($src);
                 $src = '/assets/uploads/' . $filename;
             }
+
 
             return '<img' . $m[1] . ' src="' . htmlspecialchars($src, ENT_QUOTES) . '"';
         },

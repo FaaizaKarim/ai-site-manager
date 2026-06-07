@@ -1,9 +1,16 @@
 {
-    frankenphp
-    order php_server before file_server
+	admin off
+	persist_config off
+	auto_https off
+
+	frankenphp
+	order php_server before file_server
 }
 
-:{$PORT:80} {
-    root * /app
-    php_server
+{$SERVER_NAME::8080} {
+	root * /app
+	encode gzip
+
+	php_server
+	file_server
 }
