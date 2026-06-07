@@ -5,8 +5,10 @@ set -e
 unset SERVER_NAME
 
 PORT="${PORT:-8080}"
+export SERVER_NAME=":${PORT}"
+export SERVER_ROOT="/app"
 
-echo "Starting FrankenPHP on 0.0.0.0:${PORT}"
+echo "Starting FrankenPHP — PORT=${PORT} SERVER_NAME=${SERVER_NAME}"
 
 cat > /etc/caddy/Caddyfile <<EOF
 {
@@ -14,13 +16,15 @@ cat > /etc/caddy/Caddyfile <<EOF
 	persist_config off
 	auto_https off
 
+	# Railway routes traffic over IPv4 and IPv6 — bind both
+	default_bind [::] 0.0.0.0
+
 	frankenphp
 	order php_server before file_server
 }
 
-:${PORT} {
-	bind 0.0.0.0
-	root * /app
+{\$SERVER_NAME::8080} {
+	root * {\$SERVER_ROOT:/app}
 
 	handle /health {
 		respond "OK" 200
