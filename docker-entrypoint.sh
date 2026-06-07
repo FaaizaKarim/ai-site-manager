@@ -18,7 +18,8 @@ cat > /etc/caddy/Caddyfile <<EOF
 	order php_server before file_server
 }
 
-http://0.0.0.0:${PORT} {
+:${PORT} {
+	bind 0.0.0.0
 	root * /app
 
 	handle /health {
