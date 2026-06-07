@@ -10,6 +10,9 @@ export SERVER_ROOT="/app"
 
 echo "Starting FrankenPHP — PORT=${PORT} SERVER_NAME=${SERVER_NAME}"
 
+mkdir -p /app/assets/uploads
+chmod 777 /app/assets/uploads
+
 cat > /etc/caddy/Caddyfile <<EOF
 {
 	admin off

@@ -10,16 +10,19 @@ if (!empty($_SESSION['user_id'])) {
 $error = '';
 
 if ($_SERVER['REQUEST_METHOD'] === 'POST') {
-    $name     = trim($_POST['name']     ?? '');
-    $email    = trim($_POST['email']    ?? '');
-    $password = $_POST['password'] ?? '';
+    $name            = trim($_POST['name'] ?? '');
+    $email           = trim($_POST['email'] ?? '');
+    $password        = $_POST['password'] ?? '';
+    $confirmPassword = $_POST['confirm_password'] ?? '';
 
-    if (!$name || !$email || !$password) {
+    if (!$name || !$email || !$password || !$confirmPassword) {
         $error = 'Please fill in all fields.';
     } elseif (!filter_var($email, FILTER_VALIDATE_EMAIL)) {
         $error = 'Please enter a valid email address.';
-    } elseif (strlen($password) < 6) {
-        $error = 'Password must be at least 6 characters.';
+    } elseif (strlen($password) < 8) {
+        $error = 'Password must be at least 8 characters.';
+    } elseif ($password !== $confirmPassword) {
+        $error = 'Passwords do not match.';
     } else {
         $db   = getDB();
         $stmt = $db->prepare('SELECT id FROM users WHERE email = ?');
@@ -70,7 +73,11 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
             </div>
             <div class="form-group">
                 <label>Password</label>
-                <input type="password" name="password" placeholder="••••••••" minlength="6" required>
+                <input type="password" name="password" placeholder="••••••••" minlength="8" required>
+            </div>
+            <div class="form-group">
+                <label>Confirm Password</label>
+                <input type="password" name="confirm_password" placeholder="••••••••" minlength="8" required>
             </div>
             <button type="submit" class="btn btn-primary btn-full">Create Account</button>
         </form>

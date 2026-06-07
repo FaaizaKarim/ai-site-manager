@@ -1,6 +1,6 @@
 FROM dunglas/frankenphp:latest
 
-RUN install-php-extensions pdo_mysql mysqli curl mbstring openssl
+RUN install-php-extensions pdo_mysql mysqli curl mbstring openssl fileinfo gd
 
 WORKDIR /app
 

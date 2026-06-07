@@ -190,7 +190,15 @@ document.getElementById('upload-btn').addEventListener('click', async function (
             method: 'POST',
             body: formData
         });
-        const data = await response.json();
+        const text = await response.text();
+        let data;
+        try {
+            data = JSON.parse(text);
+        } catch (parseErr) {
+            status.textContent = 'Upload failed: server returned an invalid response.';
+            status.className = 'upload-status upload-status-error';
+            return;
+        }
 
         if (data.success) {
             status.textContent = 'Uploaded successfully.';
