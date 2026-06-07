@@ -1,11 +1,12 @@
 #!/bin/sh
 set -e
 
-# Railway often injects SERVER_NAME=0.0.0.0:$PORT — the $PORT is NOT expanded
-# and Caddy fails with: Invalid address: 0.0.0.0:$PORT
+# Railway may inject SERVER_NAME=0.0.0.0:$PORT (literal $PORT) — remove it
 unset SERVER_NAME
 
 PORT="${PORT:-8080}"
+
+echo "Starting FrankenPHP on 0.0.0.0:${PORT}"
 
 cat > /etc/caddy/Caddyfile <<EOF
 {
@@ -17,10 +18,14 @@ cat > /etc/caddy/Caddyfile <<EOF
 	order php_server before file_server
 }
 
-:${PORT} {
+http://0.0.0.0:${PORT} {
 	root * /app
-	encode gzip
 
+	handle /health {
+		respond "OK" 200
+	}
+
+	encode gzip
 	php_server
 	file_server
 }
