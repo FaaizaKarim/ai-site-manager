@@ -4,11 +4,11 @@ RUN install-php-extensions pdo_mysql mysqli curl mbstring openssl
 
 WORKDIR /app
 
-# Caddyfile must live outside /app so COPY . . does not overwrite it
-COPY Caddyfile /etc/caddy/Caddyfile
+COPY docker-entrypoint.sh /entrypoint.sh
+RUN chmod +x /entrypoint.sh
+
 COPY . .
 
-ENV SERVER_NAME=":8080"
+EXPOSE 8080
 
-# Railway sets PORT at runtime — inject it into SERVER_NAME before Caddy starts
-CMD ["sh", "-c", "export SERVER_NAME=:${PORT:-8080} && exec frankenphp run --config /etc/caddy/Caddyfile"]
+ENTRYPOINT ["/entrypoint.sh"]

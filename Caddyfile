@@ -1,3 +1,7 @@
+# Generated at container start by docker-entrypoint.sh
+# Do not use {$PORT} or {$SERVER_NAME} here — Railway may inject broken values.
+# See docker-entrypoint.sh for the live config.
+
 {
 	admin off
 	persist_config off
@@ -7,7 +11,7 @@
 	order php_server before file_server
 }
 
-{$SERVER_NAME::8080} {
+:8080 {
 	root * /app
 	encode gzip
 
