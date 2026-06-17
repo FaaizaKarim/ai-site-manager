@@ -5,7 +5,7 @@ content editing using the Claude API.
 
 ## Live Demo
 
-https://your-railway-url.up.railway.app
+[https://your-railway-url.up.railway.app](https://ai-site-manager-production.up.railway.app/auth/login.php)
 
 ## Features
 
