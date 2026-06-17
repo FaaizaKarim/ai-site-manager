@@ -27,11 +27,7 @@ PHP · MySQL · JavaScript · Claude API (Anthropic) · Cursor
 4. Place the project in your XAMPP `htdocs` folder as `ai-site-manager`
 5. Run on PHP 8+ with Apache (default: `http://localhost:8080/ai-site-manager`)
 
-### Default Login
 
-- Email: `admin@example.com`
-- Password: `admin123`
 
-## Screenshots
 
-[Add screenshots of dashboard, editor, AI panel]
+
